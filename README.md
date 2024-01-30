@@ -1,2 +1,2 @@
-# tldfinder
+# TLDFinder
 Fast TLD Finder
