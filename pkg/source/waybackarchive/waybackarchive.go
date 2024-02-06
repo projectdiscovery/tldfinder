@@ -5,11 +5,11 @@ import (
 	"context"
 	"fmt"
 	"net/url"
-	"strings"
 	"time"
 
 	"github.com/projectdiscovery/tldfinder/pkg/session"
 	"github.com/projectdiscovery/tldfinder/pkg/source"
+	urlutil "github.com/projectdiscovery/utils/url"
 )
 
 type Source struct {
@@ -46,15 +46,22 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 				continue
 			}
 			line, _ = url.QueryUnescape(line)
-			for _, domain := range sess.Extractor.Extract(line) {
-				// fix for triple encoded URL
-				domain = strings.ToLower(domain)
-				domain = strings.TrimPrefix(domain, "25")
-				domain = strings.TrimPrefix(domain, "2f")
-
+			if parsed, err := urlutil.ParseURL(line, true); err == nil {
+				domain := parsed.Hostname()
 				results <- source.Result{Source: s.Name(), Type: source.Domain, Value: domain}
 				s.results++
 			}
+
+			//leaving it here for future reference
+			// for _, domain := range sess.Extractor.Extract(line) {
+			// 	// fix for triple encoded URL
+			// 	domain = strings.ToLower(domain)
+			// 	domain = strings.TrimPrefix(domain, "25")
+			// 	domain = strings.TrimPrefix(domain, "2f")
+
+			// 	results <- source.Result{Source: s.Name(), Type: source.Domain, Value: domain}
+			// 	s.results++
+			// }
 		}
 	}()
 
