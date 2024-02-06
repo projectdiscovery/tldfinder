@@ -84,11 +84,11 @@ func (s *Source) IsDefault() bool {
 	return true
 }
 
-func (s *Source) SupportedModes() []source.DiscoveryMode {
+func (s *Source) SupportedDiscoveryModes() []source.DiscoveryMode {
 	return []source.DiscoveryMode{source.DNSMode, source.DomainMode}
 }
 
-func (s *Source) EnumerationType() source.EnumerationType {
+func (s *Source) DiscoveryType() source.DiscoveryType {
 	return source.Passive
 }
 

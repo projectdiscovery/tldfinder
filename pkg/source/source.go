@@ -20,9 +20,9 @@ type Source interface {
 	// used as part of the default execution.
 	IsDefault() bool
 
-	SupportedModes() []DiscoveryMode
+	SupportedDiscoveryModes() []DiscoveryMode
 
-	EnumerationType() EnumerationType
+	DiscoveryType() DiscoveryType
 
 	// NeedsKey returns true if the source requires an API key
 	NeedsKey() bool
@@ -45,9 +45,9 @@ func (dm DiscoveryMode) String() string {
 	return [...]string{"dns", "tld", "domain"}[dm]
 }
 
-type EnumerationType uint8
+type DiscoveryType uint8
 
 const (
-	Active EnumerationType = iota
+	Active DiscoveryType = iota
 	Passive
 )

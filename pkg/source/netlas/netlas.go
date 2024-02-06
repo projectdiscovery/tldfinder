@@ -163,11 +163,11 @@ func (s *Source) IsDefault() bool {
 }
 
 // TODO: add support for TLD; search for Paypal domains in every TLDs: domain:paypal.* level:2
-func (s *Source) SupportedModes() []source.DiscoveryMode {
+func (s *Source) SupportedDiscoveryModes() []source.DiscoveryMode {
 	return []source.DiscoveryMode{source.DNSMode}
 }
 
-func (s *Source) EnumerationType() source.EnumerationType {
+func (s *Source) DiscoveryType() source.DiscoveryType {
 	return source.Passive
 }
 

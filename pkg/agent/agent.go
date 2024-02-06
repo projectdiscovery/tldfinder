@@ -57,7 +57,7 @@ func New(sourceNames, excludedSourceNames []string, useAllSources bool, discover
 	}
 
 	for sourceName, source := range sources {
-		if !sliceutil.ContainsItems(source.SupportedModes(), discoveryModes) {
+		if !sliceutil.ContainsItems(source.SupportedDiscoveryModes(), discoveryModes) {
 			delete(sources, sourceName)
 		}
 	}
