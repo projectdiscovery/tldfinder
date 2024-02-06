@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"math"
+	"slices"
 	"sort"
 	"strings"
 	"sync"
@@ -16,7 +17,6 @@ import (
 	"github.com/projectdiscovery/tldfinder/pkg/session"
 	"github.com/projectdiscovery/tldfinder/pkg/source"
 	mapsutil "github.com/projectdiscovery/utils/maps"
-	sliceutil "github.com/projectdiscovery/utils/slice"
 )
 
 // Agent is a struct for running domain enumeration
@@ -57,7 +57,7 @@ func New(sourceNames, excludedSourceNames []string, useAllSources bool, discover
 	}
 
 	for sourceName, source := range sources {
-		if !sliceutil.ContainsItems(source.SupportedDiscoveryModes(), discoveryModes) {
+		if !ContainsAny(source.SupportedDiscoveryModes(), discoveryModes) {
 			delete(sources, sourceName)
 		}
 	}
@@ -74,6 +74,14 @@ func New(sourceNames, excludedSourceNames []string, useAllSources bool, discover
 	agent := &Agent{sources: maps.Values(sources)}
 
 	return agent
+}
+
+// ContainsAny checks if any of the elements in s2 are in s1
+func ContainsAny[T comparable](s1, s2 []T) bool {
+	for _, a := range s2 {
+		return slices.Contains(s1, a)
+	}
+	return false
 }
 
 type CustomRateLimit struct {
