@@ -4,6 +4,7 @@ import (
 	"github.com/projectdiscovery/tldfinder/pkg/source"
 	"github.com/projectdiscovery/tldfinder/pkg/source/bufferover"
 	"github.com/projectdiscovery/tldfinder/pkg/source/censys"
+	"github.com/projectdiscovery/tldfinder/pkg/source/crtsh"
 	"github.com/projectdiscovery/tldfinder/pkg/source/dnsrepo"
 	"github.com/projectdiscovery/tldfinder/pkg/source/netlas"
 	"github.com/projectdiscovery/tldfinder/pkg/source/waybackarchive"
@@ -18,6 +19,7 @@ var AllSources = map[string]source.Source{
 	"netlas":         &netlas.Source{},
 	"waybackarchive": &waybackarchive.Source{},
 	"whoisxmlapi":    &whoisxmlapi.Source{},
+	"crtsh":          &crtsh.Source{},
 }
 
 var sourceWarnings = mapsutil.NewSyncLockMap[string, string](
