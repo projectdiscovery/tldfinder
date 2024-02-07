@@ -49,8 +49,8 @@ OUTPUT:
    -oI, -ip                 include host IP in output (-active only)
 
 CONFIGURATION:
-   -config string                flag config file (default "$CONFIG//tldfinder/config.yaml")
-   -pc, -provider-config string  provider config file (default "$CONFIG//tldfinder/provider-config.yaml")
+   -config string                flag config file (default "$CONFIG/tldfinder/config.yaml")
+   -pc, -provider-config string  provider config file (default "$CONFIG/tldfinder/provider-config.yaml")
    -r string[]                   comma separated list of resolvers to use
    -rL, -rlist string            file containing list of resolvers to use
    -nW, -active                  display active domains only

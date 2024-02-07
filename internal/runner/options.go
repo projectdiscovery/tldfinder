@@ -30,23 +30,23 @@ var (
 // Options contains the configuration options for tuning
 // the domain enumeration process.
 type Options struct {
-	Verbose            bool                   // Verbose flag indicates whether to show verbose output or not
-	NoColor            bool                   // NoColor disables the colored output
-	JSON               bool                   // JSON specifies whether to use json for output format or text file
-	HostIP             bool                   // HostIP specifies whether to write domains in host:ip format
-	Silent             bool                   // Silent suppresses any extra text and only writes domains to screen
-	ListSources        bool                   // ListSources specifies whether to list all available sources
-	RemoveWildcard     bool                   // RemoveWildcard specifies whether to remove potential wildcard or dead domains from the results.
-	CaptureSources     bool                   // CaptureSources specifies whether to save all sources that returned a specific domains or just the first source
-	Stdin              bool                   // Stdin specifies whether stdin input was given to the process
-	Version            bool                   // Version specifies if we should just show version and exit
-	DiscoveryMode      []source.DiscoveryMode // Mode specifies mode of discovery
-	All                bool                   // All specifies whether to use all (slow) sources.
-	Statistics         bool                   // Statistics specifies whether to report source statistics
-	Threads            int                    // Threads controls the number of threads to use for active enumerations
-	Timeout            int                    // Timeout is the seconds to wait for sources to respond
-	MaxEnumerationTime int                    // MaxEnumerationTime is the maximum amount of time in minutes to wait for enumeration
-	Query              goflags.StringSlice    // Query is the domain to find domains for
+	Verbose            bool                 // Verbose flag indicates whether to show verbose output or not
+	NoColor            bool                 // NoColor disables the colored output
+	JSON               bool                 // JSON specifies whether to use json for output format or text file
+	HostIP             bool                 // HostIP specifies whether to write domains in host:ip format
+	Silent             bool                 // Silent suppresses any extra text and only writes domains to screen
+	ListSources        bool                 // ListSources specifies whether to list all available sources
+	RemoveWildcard     bool                 // RemoveWildcard specifies whether to remove potential wildcard or dead domains from the results.
+	CaptureSources     bool                 // CaptureSources specifies whether to save all sources that returned a specific domains or just the first source
+	Stdin              bool                 // Stdin specifies whether stdin input was given to the process
+	Version            bool                 // Version specifies if we should just show version and exit
+	DiscoveryMode      source.DiscoveryMode // Mode specifies mode of discovery
+	All                bool                 // All specifies whether to use all (slow) sources.
+	Statistics         bool                 // Statistics specifies whether to report source statistics
+	Threads            int                  // Threads controls the number of threads to use for active enumerations
+	Timeout            int                  // Timeout is the seconds to wait for sources to respond
+	MaxEnumerationTime int                  // MaxEnumerationTime is the maximum amount of time in minutes to wait for enumeration
+	Query              goflags.StringSlice  // Query is the domain to find domains for
 	Output             io.Writer
 	OutputFile         string               // Output is the file to write found domains to.
 	OutputDirectory    string               // OutputDirectory is the directory to write results to in case list of domains is given
@@ -85,21 +85,18 @@ func ParseOptions() *Options {
 		flagSet.StringSliceVarP(&options.Query, "query", "q", nil, "query or list of queries for discovery (file or comma separated)", goflags.FileNormalizedStringSliceOptions),
 	)
 
-	var discoveryMode []string
+	var discoveryMode string
 	flagSet.CreateGroup("source", "Source",
 		flagSet.StringSliceVarP(&options.Sources, "sources", "s", nil, "specific sources to use for discovery (-s censys,dnsrepo). Use -ls to display all available sources.", goflags.NormalizedStringSliceOptions),
 		flagSet.StringSliceVarP(&options.ExcludeSources, "exclude-sources", "es", nil, "sources to exclude from enumeration (-es censys,dnsrepo)", goflags.NormalizedStringSliceOptions),
-		flagSet.EnumSliceVarP(&discoveryMode, "discovery-mode", "dm", []goflags.EnumVariable{goflags.EnumVariable(source.DNSMode)}, "discovery mode (dns,tld,domain) (default: dns)", goflags.AllowdTypes{
+		flagSet.EnumVarP(&discoveryMode, "discovery-mode", "dm", goflags.EnumVariable(source.DNSMode), "discovery mode (dns,tld,domain) (default: dns)", goflags.AllowdTypes{
 			source.DNSMode.String():    goflags.EnumVariable(source.DNSMode),
 			source.TLDMode.String():    goflags.EnumVariable(source.TLDMode),
 			source.DomainMode.String(): goflags.EnumVariable(source.DomainMode),
 		}),
 		flagSet.BoolVar(&options.All, "all", false, "use all sources for enumeration (slow)"),
 	)
-
-	for _, mode := range discoveryMode {
-		options.DiscoveryMode = append(options.DiscoveryMode, ParseDiscoveryMode(mode))
-	}
+	options.DiscoveryMode = ParseDiscoveryMode(discoveryMode)
 
 	flagSet.CreateGroup("filter", "Filter",
 		flagSet.StringSliceVarP(&options.Match, "match", "m", nil, "domain or list of domain to match (file or comma separated)", goflags.FileNormalizedStringSliceOptions),
@@ -264,13 +261,11 @@ func (options *Options) preProcessOptions() {
 }
 
 func (options *Options) parseQuery(query string) string {
-	for _, mode := range options.DiscoveryMode {
-		if mode == source.DNSMode {
-			if parsed, err := publicsuffix.Parse(query); err == nil {
-				query = parsed.TLD
-			} else {
-				query = strings.Trim(query, ".")
-			}
+	if options.DiscoveryMode == source.DNSMode {
+		if parsed, err := publicsuffix.Parse(query); err == nil {
+			query = parsed.TLD
+		} else {
+			query = strings.Trim(query, ".")
 		}
 	}
 	return query

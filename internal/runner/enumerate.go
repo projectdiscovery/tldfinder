@@ -56,7 +56,11 @@ func (r *Runner) EnumerateSingleQueryWithCtx(ctx context.Context, query string, 
 			case source.Error:
 				gologger.Warning().Msgf("Could not run source %s: %s\n", result.Source, result.Error)
 			case source.Domain:
-				// remove wildcards from domain
+				// Validate the domain found and remove wildcards from
+				if r.options.DiscoveryMode == source.DNSMode && !strings.HasSuffix(result.Value, "."+query) {
+					continue
+				}
+
 				domain := strings.ReplaceAll(strings.ToLower(result.Value), "*.", "")
 
 				if matchDomain := r.filterAndMatchDomain(domain); matchDomain {

@@ -27,7 +27,7 @@ type Agent struct {
 }
 
 // New creates a new agent for domain discovery
-func New(sourceNames, excludedSourceNames []string, useAllSources bool, discoveryModes []source.DiscoveryMode) *Agent {
+func New(sourceNames, excludedSourceNames []string, useAllSources bool, discoveryMode source.DiscoveryMode) *Agent {
 	sources := make(map[string]source.Source, len(AllSources))
 
 	if useAllSources {
@@ -57,7 +57,7 @@ func New(sourceNames, excludedSourceNames []string, useAllSources bool, discover
 	}
 
 	for sourceName, source := range sources {
-		if !ContainsAny(source.SupportedDiscoveryModes(), discoveryModes) {
+		if !slices.Contains(source.SupportedDiscoveryModes(), discoveryMode) {
 			delete(sources, sourceName)
 		}
 	}
