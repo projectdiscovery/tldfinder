@@ -6,6 +6,7 @@ require (
 	github.com/corpix/uarand v0.2.0
 	github.com/hako/durafmt v0.0.0-20210608085754-5c1018a4e16b
 	github.com/json-iterator/go v1.1.12
+	github.com/lib/pq v1.10.9
 	github.com/pkg/errors v0.9.1
 	github.com/projectdiscovery/dnsx v1.1.6
 	github.com/projectdiscovery/fdmax v0.0.4
@@ -42,7 +43,7 @@ require (
 	github.com/gorilla/css v1.0.0 // indirect
 	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/klauspost/pgzip v1.2.5 // indirect
-	github.com/kr/text v0.2.0 // indirect
+	github.com/kr/pretty v0.3.1 // indirect
 	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
@@ -61,7 +62,7 @@ require (
 	github.com/pierrec/lz4/v4 v4.1.2 // indirect
 	github.com/projectdiscovery/blackrock v0.0.1 // indirect
 	github.com/projectdiscovery/cdncheck v1.0.9 // indirect
-	github.com/projectdiscovery/retryabledns v1.0.52 // indirect
+	github.com/projectdiscovery/retryabledns v1.0.53 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/saintfish/chardet v0.0.0-20230101081208-5e3ef4b5456d // indirect
 	github.com/ulikunitz/xz v0.5.11 // indirect
