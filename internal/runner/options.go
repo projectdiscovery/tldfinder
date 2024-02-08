@@ -96,7 +96,6 @@ func ParseOptions() *Options {
 		}),
 		flagSet.BoolVar(&options.All, "all", false, "use all sources for enumeration (slow)"),
 	)
-	options.DiscoveryMode = ParseDiscoveryMode(discoveryMode)
 
 	flagSet.CreateGroup("filter", "Filter",
 		flagSet.StringSliceVarP(&options.Match, "match", "m", nil, "domain or list of domain to match (file or comma separated)", goflags.FileNormalizedStringSliceOptions),
@@ -150,6 +149,8 @@ func ParseOptions() *Options {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
+
+	options.DiscoveryMode = ParseDiscoveryMode(discoveryMode)
 
 	if exists := fileutil.FileExists(defaultProviderConfigLocation); !exists {
 		if err := createProviderConfigYAML(defaultProviderConfigLocation); err != nil {
