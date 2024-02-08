@@ -59,7 +59,6 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 
 		for {
 			requestBody := buildRequestBody(nextPageSearchAfter, query)
-			fmt.Println(string(requestBody))
 			resp, err := sess.Post(ctx, "https://reverse-whois.whoisxmlapi.com/api/v2", "",
 				headers, bytes.NewReader(requestBody))
 
