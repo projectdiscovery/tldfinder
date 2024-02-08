@@ -59,6 +59,7 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 
 		for {
 			requestBody := buildRequestBody(nextPageSearchAfter, query)
+			fmt.Println(string(requestBody))
 			resp, err := sess.Post(ctx, "https://reverse-whois.whoisxmlapi.com/api/v2", "",
 				headers, bytes.NewReader(requestBody))
 
@@ -102,7 +103,7 @@ func buildRequestBody(nextPageSearchAfter string, query string) []byte {
 				"mode": "purchase",
 				"punycode": true,
 				"basicSearchTerms": {
-					"include": [%s]
+					"include": ["%s"]
 				}
 			}`, query))
 	} else {
@@ -112,7 +113,7 @@ func buildRequestBody(nextPageSearchAfter string, query string) []byte {
 				"punycode": true,
 				"searchAfter": "%s",
 				"basicSearchTerms": {
-					"include": [%s]
+					"include": ["%s"]
 				}
 			}`, nextPageSearchAfter, query))
 	}
