@@ -3,6 +3,7 @@ package whoxy
 import (
 	"context"
 	"fmt"
+	"strings"
 	"time"
 
 	jsoniter "github.com/json-iterator/go"
@@ -12,11 +13,9 @@ import (
 )
 
 type response struct {
-	TotalPages   int `json:"total_pages"`
-	CurrentPage  int `json:"current_page"`
-	SearchResult []struct {
-		DomainName string `json:"domain_name"`
-	}
+	TotalPages  int    `json:"total_pages"`
+	CurrentPage int    `json:"current_page"`
+	DomainNames string `json:"domain_names"`
 }
 
 type Source struct {
@@ -43,30 +42,30 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 			s.skipped = true
 			return
 		}
+
 		page := 1
 		for {
-			resp, err := sess.Get(ctx, fmt.Sprintf("https://api.whoxy.com/?key=%s&reverse=whois&name=%s&page=%s", randomApiKey, query, page), "", nil)
-			fmt.Print(resp)
-			if err != nil && resp == nil {
+			resp, err := sess.Get(ctx, fmt.Sprintf("https://api.whoxy.com/?key=%s&reverse=whois&mode=domains&keyword=%s&page=%d", randomApiKey, query, page), "", nil)
+			if err != nil {
 				results <- source.Result{Source: s.Name(), Type: source.Error, Error: err}
 				s.errors++
-				sess.DiscardHTTPResponse(resp)
+				if resp != nil {
+					sess.DiscardHTTPResponse(resp)
+				}
 				return
 			}
 
 			var whoxyResponse response
 			err = jsoniter.NewDecoder(resp.Body).Decode(&whoxyResponse)
+			resp.Body.Close()
 			if err != nil {
 				results <- source.Result{Source: s.Name(), Type: source.Error, Error: err}
 				s.errors++
-				resp.Body.Close()
 				return
 			}
 
-			resp.Body.Close()
-
-			for _, result := range whoxyResponse.SearchResult {
-				results <- source.Result{Source: s.Name(), Type: source.Domain, Value: result.DomainName}
+			for _, domain := range strings.Split(whoxyResponse.DomainNames, ",") {
+				results <- source.Result{Source: s.Name(), Type: source.Domain, Value: strings.TrimSpace(domain)}
 				s.results++
 			}
 
@@ -75,7 +74,6 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 			}
 			page++
 		}
-
 	}()
 
 	return results
@@ -113,4 +111,3 @@ func (s *Source) Statistics() source.Statistics {
 		Skipped:   s.skipped,
 	}
 }
-
