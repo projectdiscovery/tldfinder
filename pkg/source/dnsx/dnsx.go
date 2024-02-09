@@ -2,11 +2,19 @@ package dnsrepo
 
 import (
 	"context"
+	_ "embed"
+	"math"
+	"strings"
 	"time"
 
+	"github.com/miekg/dns"
+	"github.com/projectdiscovery/dnsx/libs/dnsx"
 	"github.com/projectdiscovery/tldfinder/pkg/session"
 	"github.com/projectdiscovery/tldfinder/pkg/source"
 )
+
+//go:embed tlds.txt
+var tldData string
 
 type Source struct {
 	apiKeys   []string
@@ -27,8 +35,39 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 			close(results)
 		}(time.Now())
 
-		//TODO: implement once the API is available
+		dnsxOptions := dnsx.DefaultOptions
+		dnsxOptions.MaxRetries = 2
+		dnsxOptions.TraceMaxRecursion = math.MaxInt16
+		dnsxOptions.QuestionTypes = []uint16{dns.TypeA}
+		dnsX, err := dnsx.New(dnsxOptions)
+		if err != nil {
+			results <- source.Result{Source: s.Name(), Type: source.Error, Error: err}
+			s.errors++
+			return
+		}
 
+		tlds := strings.Split(tldData, "\n")
+		var domains []string
+		for _, tld := range tlds {
+			domains = append(domains, query+"."+tld)
+		}
+		for _, domain := range domains {
+			sourceName := ctx.Value(session.CtxSourceArg).(string)
+			mrlErr := sess.MultiRateLimiter.Take(sourceName)
+			if mrlErr != nil {
+				results <- source.Result{Source: s.Name(), Type: source.Error, Error: mrlErr}
+				s.errors++
+				return
+			}
+			dnsData := dnsx.ResponseData{}
+			dnsData.DNSData, _ = dnsX.QueryMultiple(domain)
+			if dnsData.DNSData == nil || dnsData.DNSData.StatusCode == "NXDOMAIN" || dnsData.Host == "" || dnsData.Timestamp.IsZero() {
+				continue
+			}
+
+			results <- source.Result{Source: s.Name(), Type: source.Domain, Value: domain}
+			s.results++
+		}
 	}()
 
 	return results
@@ -39,7 +78,7 @@ func (s *Source) Name() string {
 }
 
 func (s *Source) IsDefault() bool {
-	return false
+	return true
 }
 
 func (s *Source) SupportedDiscoveryModes() []source.DiscoveryMode {

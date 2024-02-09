@@ -268,6 +268,10 @@ func (options *Options) parseQuery(query string) string {
 		} else {
 			query = strings.Trim(query, ".")
 		}
+	} else if options.DiscoveryMode == source.TLDMode {
+		if parsed, err := publicsuffix.Parse(query); err == nil {
+			query = parsed.SLD
+		}
 	}
 	return query
 }
