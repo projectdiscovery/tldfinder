@@ -22,6 +22,7 @@ var AllSources = map[string]source.Source{
 	"whoisxmlapi":    &whoisxmlapi.Source{},
 	"crtsh":          &crtsh.Source{},
 	"dnsx":           &dnsxSrc.Source{},
+	"whoxy":          &whoxy.Source{},
 }
 
 var sourceWarnings = mapsutil.NewSyncLockMap[string, string](
