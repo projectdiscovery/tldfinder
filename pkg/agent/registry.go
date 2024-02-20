@@ -10,6 +10,7 @@ import (
 	"github.com/projectdiscovery/tldfinder/pkg/source/netlas"
 	"github.com/projectdiscovery/tldfinder/pkg/source/waybackarchive"
 	"github.com/projectdiscovery/tldfinder/pkg/source/whoisxmlapi"
+	"github.com/projectdiscovery/tldfinder/pkg/source/whoxy"
 	mapsutil "github.com/projectdiscovery/utils/maps"
 )
 
