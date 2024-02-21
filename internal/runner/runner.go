@@ -123,8 +123,8 @@ func (r *Runner) RunEnumeration() error {
 func (r *Runner) RunEnumerationWithCtx(ctx context.Context) error {
 	outputs := []io.Writer{r.options.Output}
 
-	if len(r.options.Query) > 0 {
-		domainsReader := strings.NewReader(strings.Join(r.options.Query, "\n"))
+	if len(r.options.Domain) > 0 {
+		domainsReader := strings.NewReader(strings.Join(r.options.Domain, "\n"))
 		return r.EnumerateMultipleQueriesWithCtx(ctx, domainsReader, outputs)
 	}
 
@@ -161,7 +161,7 @@ func (r *Runner) EnumerateMultipleQueriesWithCtx(ctx context.Context, reader io.
 			outputWriter := NewOutputWriter(r.options.JSON)
 			file, err = outputWriter.createFile(r.options.OutputFile, true)
 			if err != nil {
-				gologger.Error().Msgf("Could not create file %s for %s: %s\n", r.options.OutputFile, r.options.Query, err)
+				gologger.Error().Msgf("Could not create file %s for %s: %s\n", r.options.OutputFile, r.options.Domain, err)
 				return err
 			}
 
@@ -179,7 +179,7 @@ func (r *Runner) EnumerateMultipleQueriesWithCtx(ctx context.Context, reader io.
 			outputWriter := NewOutputWriter(r.options.JSON)
 			file, err = outputWriter.createFile(outputFile, false)
 			if err != nil {
-				gologger.Error().Msgf("Could not create file %s for %s: %s\n", r.options.OutputFile, r.options.Query, err)
+				gologger.Error().Msgf("Could not create file %s for %s: %s\n", r.options.OutputFile, r.options.Domain, err)
 				return err
 			}
 

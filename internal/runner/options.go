@@ -46,7 +46,7 @@ type Options struct {
 	Threads            int                  // Threads controls the number of threads to use for active enumerations
 	Timeout            int                  // Timeout is the seconds to wait for sources to respond
 	MaxEnumerationTime int                  // MaxEnumerationTime is the maximum amount of time in minutes to wait for enumeration
-	Query              goflags.StringSlice  // Query is the domain to find domains for
+	Domain             goflags.StringSlice  // Domain is the domain to find domains for
 	Output             io.Writer
 	OutputFile         string               // Output is the file to write found domains to.
 	OutputDirectory    string               // OutputDirectory is the directory to write results to in case list of domains is given
@@ -82,7 +82,7 @@ func ParseOptions() *Options {
 	flagSet.SetDescription(`A streamlined tool for discovering TLDs, associated subdomains, and related domain names.`)
 
 	flagSet.CreateGroup("input", "Input",
-		flagSet.StringSliceVarP(&options.Query, "query", "q", nil, "query or list of queries for discovery (file or comma separated)", goflags.FileNormalizedStringSliceOptions),
+		flagSet.StringSliceVarP(&options.Domain, "domain", "d", nil, "domain or list of domains for discovery (file or comma separated)", goflags.FileNormalizedStringSliceOptions),
 	)
 
 	var discoveryMode string
@@ -254,9 +254,9 @@ func listSources(options *Options) {
 }
 
 func (options *Options) preProcessOptions() {
-	for i, query := range options.Query {
+	for i, query := range options.Domain {
 		query, _ = sanitize(query)
-		options.Query[i] = options.parseQuery(query)
+		options.Domain[i] = options.parseQuery(query)
 
 	}
 }

@@ -18,7 +18,7 @@ import (
 func (options *Options) validateOptions() error {
 	// Check if domain, list of queries, or stdin info was provided.
 	// If none was provided, then return.
-	if len(options.Query) == 0 && !options.Stdin {
+	if len(options.Domain) == 0 && !options.Stdin {
 		return errors.New("no input list provided")
 	}
 
