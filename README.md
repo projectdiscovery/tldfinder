@@ -20,7 +20,7 @@ Usage:
 
 Flags:
 INPUT:
-   -q, -query string[]  query or list of queries for discovery (file or comma separated)
+   -d, -domain string[]  domain or list of domains for discovery (file or comma separated)
 
 SOURCE:
    -s, -sources string[]           specific sources to use for discovery (-s censys,dnsrepo). Use -ls to display all available sources.
