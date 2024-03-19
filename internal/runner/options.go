@@ -89,7 +89,7 @@ func ParseOptions() *Options {
 	flagSet.CreateGroup("source", "Source",
 		flagSet.StringSliceVarP(&options.Sources, "sources", "s", nil, "specific sources to use for discovery (-s censys,dnsrepo). Use -ls to display all available sources.", goflags.NormalizedStringSliceOptions),
 		flagSet.StringSliceVarP(&options.ExcludeSources, "exclude-sources", "es", nil, "sources to exclude from enumeration (-es censys,dnsrepo)", goflags.NormalizedStringSliceOptions),
-		flagSet.EnumVarP(&discoveryMode, "discovery-mode", "dm", goflags.EnumVariable(source.DNSMode), "discovery mode (dns,tld,domain) (default: dns)", goflags.AllowdTypes{
+		flagSet.EnumVarP(&discoveryMode, "discovery-mode", "dm", goflags.EnumVariable(source.DNSMode), "discovery mode (dns,tld,domain)", goflags.AllowdTypes{
 			source.DNSMode.String():    goflags.EnumVariable(source.DNSMode),
 			source.TLDMode.String():    goflags.EnumVariable(source.TLDMode),
 			source.DomainMode.String(): goflags.EnumVariable(source.DomainMode),
@@ -206,7 +206,8 @@ func ParseOptions() *Options {
 	// invalid options have been used, exit.
 	err = options.validateOptions()
 	if err != nil {
-		gologger.Fatal().Msgf("Program exiting: %s\n", err)
+		gologger.Warning().Msgf("Program exiting: %s\n", err)
+		os.Exit(0)
 	}
 
 	return options
