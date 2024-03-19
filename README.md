@@ -69,3 +69,11 @@ OPTIMIZATION:
    -timeout int   seconds to wait before timing out (default 30)
    -max-time int  minutes to wait for enumeration results (default 10)
 ```
+
+
+// Using data from data.iana.org/TLD/tlds-alpha-by-domain.txt as the source for TLDs
+
+
+## References
+
+- **[List of Top-Level Domains (IANA)](https://data.iana.org/TLD/tlds-alpha-by-domain.txt)**: A list of all valid top-level domains is maintained by the IANA and is updated from time to time.
