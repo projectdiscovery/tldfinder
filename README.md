@@ -25,7 +25,7 @@ INPUT:
 SOURCE:
    -s, -sources string[]           specific sources to use for discovery (-s censys,dnsrepo). Use -ls to display all available sources.
    -es, -exclude-sources string[]  sources to exclude from enumeration (-es censys,dnsrepo)
-   -dm, -discovery-mode value      discovery mode (dns,tld,domain) (default: dns) (default dns)
+   -dm, -discovery-mode value      discovery mode (dns,tld,domain) (default dns)
    -all                            use all sources for enumeration (slow)
 
 FILTER:
