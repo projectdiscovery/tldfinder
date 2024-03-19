@@ -13,6 +13,8 @@ import (
 	"github.com/projectdiscovery/tldfinder/pkg/source"
 )
 
+// Using data from data.iana.org/TLD/tlds-alpha-by-domain.txt as the source for TLDs
+
 //go:embed tlds.txt
 var tldData string
 
