@@ -12,7 +12,7 @@ This will display help for the tool. Here are all the switches it supports.
 
 
 ```console
-.\tldfinder --help
+./tldfinder --help
 A streamlined tool for discovering TLDs, associated subdomains, and related domain names.
 
 Usage:
