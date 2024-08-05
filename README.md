@@ -1,4 +1,4 @@
-# TLDFinder
+# tldfinder
 A streamlined tool for discovering TLDs, associated subdomains, and related domain names.
 
 
