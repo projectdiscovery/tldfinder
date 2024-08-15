@@ -14,19 +14,8 @@ import (
 )
 
 type response struct {
-	Search string `json:"search"`
-	Result Result `json:"result"`
-}
-
-type Result struct {
-	Count   int      `json:"count"`
-	Records []Record `json:"records"`
-}
-
-type Record struct {
-	Domain    string `json:"domain"`
-	FirstSeen int    `json:"firstSeen"`
-	LastSeen  int    `json:"lastSeen"`
+	NextPageSearchAfter string   `json:"nextPageSearchAfter"`
+	DomainList          []string `json:"domainsList"`
 }
 
 type Source struct {
@@ -80,11 +69,11 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 
 			resp.Body.Close()
 
-			for _, record := range data.Result.Records {
-				results <- source.Result{Source: s.Name(), Type: source.Domain, Value: record.Domain}
+			for _, record := range data.DomainList {
+				results <- source.Result{Source: s.Name(), Type: source.Domain, Value: record}
 				s.results++
 			}
-
+			nextPageSearchAfter = data.NextPageSearchAfter
 			if nextPageSearchAfter == "" {
 				break
 			}
