@@ -9,7 +9,7 @@ require (
 	github.com/lib/pq v1.10.9
 	github.com/miekg/dns v1.1.56
 	github.com/pkg/errors v0.9.1
-	github.com/projectdiscovery/dnsx v1.1.6
+	github.com/projectdiscovery/dnsx v1.2.1
 	github.com/projectdiscovery/fdmax v0.0.4
 	github.com/projectdiscovery/goflags v0.1.63
 	github.com/projectdiscovery/gologger v1.1.18
