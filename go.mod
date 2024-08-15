@@ -13,7 +13,7 @@ require (
 	github.com/projectdiscovery/fdmax v0.0.4
 	github.com/projectdiscovery/goflags v0.1.38
 	github.com/projectdiscovery/gologger v1.1.18
-	github.com/projectdiscovery/ratelimit v0.0.26
+	github.com/projectdiscovery/ratelimit v0.0.51
 	github.com/projectdiscovery/utils v0.2.5
 	github.com/rs/xid v1.5.0
 	github.com/weppos/publicsuffix-go v0.30.1-0.20230422193905-8fecedd899db
@@ -90,6 +90,7 @@ require (
 	golang.org/x/oauth2 v0.11.0 // indirect
 	golang.org/x/sys v0.18.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.17.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
