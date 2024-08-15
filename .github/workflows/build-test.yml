@@ -1,0 +1,34 @@
+name: 🔨 Build Test
+
+on:
+  pull_request:
+    paths:
+      - '**.go'
+      - '**.mod'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Test Builds
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: projectdiscovery/actions/setup/go@v1
+
+      - name: Verify Go modules
+        run: make verify
+
+      - name: Build
+        run: go build .
+        working-directory: cmd/tldfinder
+
+      - name: Test
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: go test ./...
