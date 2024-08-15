@@ -17,3 +17,5 @@ test:
 	$(GOTEST) $(GOFLAGS) ./...
 tidy:
 	$(GOMOD) tidy
+verify: tidy
+	$(GOMOD) verify
