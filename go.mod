@@ -16,7 +16,7 @@ require (
 	github.com/projectdiscovery/ratelimit v0.0.51
 	github.com/projectdiscovery/utils v0.2.5
 	github.com/rs/xid v1.5.0
-	github.com/weppos/publicsuffix-go v0.30.1-0.20230422193905-8fecedd899db
+	github.com/weppos/publicsuffix-go v0.30.1
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a
 	gopkg.in/yaml.v3 v3.0.1
 )
@@ -30,12 +30,14 @@ require (
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
+	github.com/bits-and-blooms/bitset v1.13.0 // indirect
 	github.com/charmbracelet/glamour v0.6.0 // indirect
 	github.com/cheggaaa/pb/v3 v3.1.4 // indirect
 	github.com/cnf/structhash v0.0.0-20201127153200-e1b16c1ebc08 // indirect
 	github.com/dlclark/regexp2 v1.8.1 // indirect
 	github.com/dsnet/compress v0.0.2-0.20210315054119-f66993602bf5 // indirect
 	github.com/fatih/color v1.15.0 // indirect
+	github.com/gaissmai/bart v0.9.5 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
@@ -65,7 +67,7 @@ require (
 	github.com/pierrec/lz4/v4 v4.1.2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect
 	github.com/projectdiscovery/blackrock v0.0.1 // indirect
-	github.com/projectdiscovery/cdncheck v1.0.9 // indirect
+	github.com/projectdiscovery/cdncheck v1.1.0 // indirect
 	github.com/projectdiscovery/machineid v0.0.0-20240226150047-2e2c51e35983 // indirect
 	github.com/projectdiscovery/retryabledns v1.0.71 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
@@ -79,7 +81,6 @@ require (
 	github.com/tklauser/numcpus v0.6.1 // indirect
 	github.com/ulikunitz/xz v0.5.11 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
-	github.com/yl2chen/cidranger v1.0.2 // indirect
 	github.com/yuin/goldmark v1.5.4 // indirect
 	github.com/yuin/goldmark-emoji v1.0.1 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
