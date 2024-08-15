@@ -61,6 +61,8 @@ github.com/google/go-querystring v1.0.0/go.mod h1:odCYkC5MyYFN7vkCjXpyrEuKhc/BUO
 github.com/google/go-querystring v1.1.0 h1:AnCroh3fv4ZBgVIf1Iwtovgjaw/GiKJo8M8yD/fhyJ8=
 github.com/google/go-querystring v1.1.0/go.mod h1:Kcdr2DB4koayq7X8pmAG4sNG59So17icRSOU623lUBU=
 github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
+github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 h1:El6M4kTTCOh6aBiKaUGG7oYTSPP8MxqL4YI3kZKwcP4=
+github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510/go.mod h1:pupxD2MaaD3pAXIBCelhxNneeOaAeabZDe5s4K6zSpQ=
 github.com/google/uuid v1.3.1 h1:KjJaJ9iWZ3jOFZIf1Lqf4laDRCasjl0BCmnEGxkdLb4=
 github.com/google/uuid v1.3.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/gorilla/css v1.0.0 h1:BQqNyPTi50JCFMTw/b67hByjMVXZRwGha6wxVGkeihY=
@@ -143,8 +145,8 @@ github.com/projectdiscovery/dnsx v1.1.6 h1:QdKVKC0n/fpgaB4q3s6A2wn+qqg75CY0XxNkU
 github.com/projectdiscovery/dnsx v1.1.6/go.mod h1:9rkLQzJHxQ26qiD1PhfoJDrhqCVN8lKLsxiAON1uDxM=
 github.com/projectdiscovery/fdmax v0.0.4 h1:K9tIl5MUZrEMzjvwn/G4drsHms2aufTn1xUdeVcmhmc=
 github.com/projectdiscovery/fdmax v0.0.4/go.mod h1:oZLqbhMuJ5FmcoaalOm31B1P4Vka/CqP50nWjgtSz+I=
-github.com/projectdiscovery/goflags v0.1.38 h1:+StqgcGxBy0Ogyq+QjqFCwC/O2VJItgZW97rxpwbb08=
-github.com/projectdiscovery/goflags v0.1.38/go.mod h1:0FHBL7g1TKLHw04zSFsWCSU2grGB7zKKFrYKJx2H6mk=
+github.com/projectdiscovery/goflags v0.1.63 h1:xy3nqpzmSFEmG0LKTv3xLcp9LMbvbFkLZcjcnFe3xR4=
+github.com/projectdiscovery/goflags v0.1.63/go.mod h1:ptFbCm+5RmSHTSG4oniwBRRHJlguBTOOfMUfezeGbZ0=
 github.com/projectdiscovery/gologger v1.1.18 h1:fux2S/LXYe18/w4PylAFpEFg+EApNCuyS85x25nDE98=
 github.com/projectdiscovery/gologger v1.1.18/go.mod h1:IgjKgVLfVGUovxlC6WJcXK0qvo/tNZ1P0+r6miQqyRk=
 github.com/projectdiscovery/machineid v0.0.0-20240226150047-2e2c51e35983 h1:ZScLodGSezQVwsQDtBSMFp72WDq0nNN+KE/5DHKY5QE=
