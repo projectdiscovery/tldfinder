@@ -25,7 +25,14 @@ func (r *Runner) EnumerateSingleQuery(query string, writers []io.Writer) error {
 
 // EnumerateSingleQueryWithCtx performs domain enumeration against a single query
 func (r *Runner) EnumerateSingleQueryWithCtx(ctx context.Context, query string, writers []io.Writer) error {
-	gologger.Info().Msgf("Enumerating domains for %s\n", query)
+	switch r.options.DiscoveryMode {
+	case source.DNSMode:
+		gologger.Info().Msgf("Enumerating sub(domains) for \"%s\" TLD\n", query)
+	case source.TLDMode:
+		gologger.Info().Msgf("Enumerating TLDs for \"%s\"\n", query)
+	case source.DomainMode:
+		gologger.Info().Msgf("Enumerating related domains for \"%s\"\n", query)
+	}
 
 	// Check if the user has asked to remove wildcards explicitly.
 	// If yes, create the resolution pool and get the wildcards for the current domain
