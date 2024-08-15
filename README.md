@@ -154,6 +154,12 @@ cbd0d2028lo7e2iocmdg.us-central1.visionai.goog
 [INF] Found 3329 domains for goog in 10 seconds 458 milliseconds
 ```
 
+## Reference
+
+- [Hacking Beyond.com — Enumerating Private TLDs
+](https://cloud.google.com/blog/topics/threat-intelligence/enumerating-private-tlds/)
+
+
 ## Acknowledgements
 
 - [N7WEra](https://github.com/N7WEra) for coming up with idea for this project.
