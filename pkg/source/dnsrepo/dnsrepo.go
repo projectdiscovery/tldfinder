@@ -85,7 +85,7 @@ func (s *Source) IsDefault() bool {
 }
 
 func (s *Source) SupportedDiscoveryModes() []source.DiscoveryMode {
-	return []source.DiscoveryMode{source.DNSMode, source.DomainMode}
+	return []source.DiscoveryMode{source.DNSMode}
 }
 
 func (s *Source) DiscoveryType() source.DiscoveryType {
