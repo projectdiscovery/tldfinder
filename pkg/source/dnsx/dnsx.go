@@ -5,6 +5,7 @@ import (
 	_ "embed"
 	"math"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/miekg/dns"
@@ -53,23 +54,35 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 		for _, tld := range tlds {
 			domains = append(domains, query+"."+tld)
 		}
-		for _, domain := range domains {
-			sourceName := ctx.Value(session.CtxSourceArg).(string)
-			mrlErr := sess.MultiRateLimiter.Take(sourceName)
-			if mrlErr != nil {
-				results <- source.Result{Source: s.Name(), Type: source.Error, Error: mrlErr}
-				s.errors++
-				return
-			}
-			dnsData := dnsx.ResponseData{}
-			dnsData.DNSData, _ = dnsX.QueryMultiple(domain)
-			if dnsData.DNSData == nil || dnsData.DNSData.StatusCode == "NXDOMAIN" || dnsData.Host == "" || dnsData.Timestamp.IsZero() {
-				continue
-			}
 
-			results <- source.Result{Source: s.Name(), Type: source.Domain, Value: domain}
-			s.results++
+		//TODO: make this configurable
+		sem := make(chan struct{}, 100)
+		var wg sync.WaitGroup
+		for _, domain := range domains {
+			wg.Add(1)
+			sem <- struct{}{}
+			go func(domain string) {
+				defer wg.Done()
+				defer func() { <-sem }()
+				sourceName := ctx.Value(session.CtxSourceArg).(string)
+				mrlErr := sess.MultiRateLimiter.Take(sourceName)
+				if mrlErr != nil {
+					results <- source.Result{Source: s.Name(), Type: source.Error, Error: mrlErr}
+					s.errors++
+					return
+				}
+				dnsData := dnsx.ResponseData{}
+				dnsData.DNSData, _ = dnsX.QueryMultiple(domain)
+				if dnsData.DNSData == nil || dnsData.DNSData.StatusCode == "NXDOMAIN" || dnsData.Host == "" || dnsData.Timestamp.IsZero() {
+					return
+				}
+
+				results <- source.Result{Source: s.Name(), Type: source.Domain, Value: domain}
+				s.results++
+			}(domain)
 		}
+		wg.Wait()
+		close(sem)
 	}()
 
 	return results
