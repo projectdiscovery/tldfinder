@@ -15,6 +15,7 @@ import (
 	"github.com/projectdiscovery/tldfinder/pkg/registry"
 	"github.com/projectdiscovery/tldfinder/pkg/resolve"
 	"github.com/projectdiscovery/tldfinder/pkg/source"
+	"github.com/projectdiscovery/tldfinder/pkg/utils"
 	fileutil "github.com/projectdiscovery/utils/file"
 	folderutil "github.com/projectdiscovery/utils/folder"
 	logutil "github.com/projectdiscovery/utils/log"
@@ -258,7 +259,7 @@ func listSources(options *Options) {
 
 func (options *Options) preProcessOptions() {
 	for i, query := range options.Domain {
-		query, _ = sanitize(query)
+		query, _ = utils.Sanitize(query)
 		options.Domain[i] = options.parseQuery(query)
 	}
 }

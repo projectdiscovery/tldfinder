@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"errors"
 	"math/rand"
 	"strings"
 
@@ -39,4 +40,16 @@ func createMultiPartKey(key string) (keyPartA, keyPartB string, ok bool) {
 	}
 
 	return
+}
+
+var (
+	ErrEmptyInput = errors.New("empty data")
+)
+
+func Sanitize(data string) (string, error) {
+	data = strings.Trim(data, "\n\t\"'` ")
+	if data == "" {
+		return "", ErrEmptyInput
+	}
+	return strings.ToLower(data), nil
 }
