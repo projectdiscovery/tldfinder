@@ -5,13 +5,13 @@ import (
 	_ "embed"
 	"math"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/miekg/dns"
 	"github.com/projectdiscovery/dnsx/libs/dnsx"
 	"github.com/projectdiscovery/tldfinder/pkg/session"
 	"github.com/projectdiscovery/tldfinder/pkg/source"
+	syncutil "github.com/projectdiscovery/utils/sync"
 )
 
 // Using data from data.iana.org/TLD/tlds-alpha-by-domain.txt as the source for TLDs
@@ -56,14 +56,18 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 		}
 
 		//TODO: make this configurable
-		sem := make(chan struct{}, 100)
-		var wg sync.WaitGroup
+		wg, err := syncutil.New(syncutil.WithSize(100))
+		if err != nil {
+			results <- source.Result{Source: s.Name(), Type: source.Error, Error: err}
+			s.errors++
+			return
+		}
+
 		for _, domain := range domains {
-			wg.Add(1)
-			sem <- struct{}{}
+			wg.Add()
 			go func(domain string) {
 				defer wg.Done()
-				defer func() { <-sem }()
+
 				sourceName := ctx.Value(session.CtxSourceArg).(string)
 				mrlErr := sess.MultiRateLimiter.Take(sourceName)
 				if mrlErr != nil {
@@ -81,8 +85,8 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 				s.results++
 			}(domain)
 		}
+
 		wg.Wait()
-		close(sem)
 	}()
 
 	return results
