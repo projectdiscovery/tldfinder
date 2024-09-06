@@ -11,6 +11,7 @@ import (
 	"github.com/projectdiscovery/dnsx/libs/dnsx"
 	"github.com/projectdiscovery/tldfinder/pkg/session"
 	"github.com/projectdiscovery/tldfinder/pkg/source"
+	syncutil "github.com/projectdiscovery/utils/sync"
 )
 
 // Using data from data.iana.org/TLD/tlds-alpha-by-domain.txt as the source for TLDs
@@ -53,23 +54,39 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 		for _, tld := range tlds {
 			domains = append(domains, query+"."+tld)
 		}
-		for _, domain := range domains {
-			sourceName := ctx.Value(session.CtxSourceArg).(string)
-			mrlErr := sess.MultiRateLimiter.Take(sourceName)
-			if mrlErr != nil {
-				results <- source.Result{Source: s.Name(), Type: source.Error, Error: mrlErr}
-				s.errors++
-				return
-			}
-			dnsData := dnsx.ResponseData{}
-			dnsData.DNSData, _ = dnsX.QueryMultiple(domain)
-			if dnsData.DNSData == nil || dnsData.DNSData.StatusCode == "NXDOMAIN" || dnsData.Host == "" || dnsData.Timestamp.IsZero() {
-				continue
-			}
 
-			results <- source.Result{Source: s.Name(), Type: source.Domain, Value: domain}
-			s.results++
+		//TODO: make this configurable
+		wg, err := syncutil.New(syncutil.WithSize(100))
+		if err != nil {
+			results <- source.Result{Source: s.Name(), Type: source.Error, Error: err}
+			s.errors++
+			return
 		}
+
+		for _, domain := range domains {
+			wg.Add()
+			go func(domain string) {
+				defer wg.Done()
+
+				sourceName := ctx.Value(session.CtxSourceArg).(string)
+				mrlErr := sess.MultiRateLimiter.Take(sourceName)
+				if mrlErr != nil {
+					results <- source.Result{Source: s.Name(), Type: source.Error, Error: mrlErr}
+					s.errors++
+					return
+				}
+				dnsData := dnsx.ResponseData{}
+				dnsData.DNSData, _ = dnsX.QueryMultiple(domain)
+				if dnsData.DNSData == nil || dnsData.DNSData.StatusCode == "NXDOMAIN" || dnsData.Host == "" || dnsData.Timestamp.IsZero() {
+					return
+				}
+
+				results <- source.Result{Source: s.Name(), Type: source.Domain, Value: domain}
+				s.results++
+			}(domain)
+		}
+
+		wg.Wait()
 	}()
 
 	return results
