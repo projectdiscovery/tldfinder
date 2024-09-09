@@ -13,7 +13,7 @@ require (
 	github.com/projectdiscovery/fdmax v0.0.4
 	github.com/projectdiscovery/goflags v0.1.64
 	github.com/projectdiscovery/gologger v1.1.23
-	github.com/projectdiscovery/ratelimit v0.0.53
+	github.com/projectdiscovery/ratelimit v0.0.54
 	github.com/projectdiscovery/utils v0.2.8
 	github.com/rs/xid v1.5.0
 	github.com/weppos/publicsuffix-go v0.30.1
