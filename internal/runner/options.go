@@ -9,6 +9,7 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/logrusorgru/aurora"
 	"github.com/projectdiscovery/goflags"
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/tldfinder/pkg/agent"
@@ -275,7 +276,7 @@ func (options *Options) parseQuery(query string) string {
 		if slices.Contains(registry.PrivateTLDs, tld) {
 			query = tld
 		} else {
-			gologger.Warning().Msgf("Skipping \"%s\": only private TLDs are allowed (e.g., .google)\n", query)
+			gologger.Print().Msgf("[%v] Skipping \"%s\": only private TLDs are allowed (e.g., .google)\n", aurora.NewAurora(!options.NoColor).BrightYellow("WRN"), query)
 			query = ""
 		}
 
