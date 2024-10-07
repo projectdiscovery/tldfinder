@@ -14,7 +14,7 @@ require (
 	github.com/projectdiscovery/goflags v0.1.64
 	github.com/projectdiscovery/gologger v1.1.25
 	github.com/projectdiscovery/ratelimit v0.0.56
-	github.com/projectdiscovery/utils v0.2.11
+	github.com/projectdiscovery/utils v0.2.12
 	github.com/rs/xid v1.5.0
 	github.com/weppos/publicsuffix-go v0.30.1
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a
@@ -70,7 +70,7 @@ require (
 	github.com/projectdiscovery/blackrock v0.0.1 // indirect
 	github.com/projectdiscovery/cdncheck v1.1.0 // indirect
 	github.com/projectdiscovery/machineid v0.0.0-20240226150047-2e2c51e35983 // indirect
-	github.com/projectdiscovery/retryabledns v1.0.77 // indirect
+	github.com/projectdiscovery/retryabledns v1.0.79 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/saintfish/chardet v0.0.0-20230101081208-5e3ef4b5456d // indirect
 	github.com/shirou/gopsutil/v3 v3.23.7 // indirect
