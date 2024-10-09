@@ -9,16 +9,20 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/logrusorgru/aurora"
 	"github.com/projectdiscovery/goflags"
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/tldfinder/pkg/agent"
+	"github.com/projectdiscovery/tldfinder/pkg/registry"
 	"github.com/projectdiscovery/tldfinder/pkg/resolve"
 	"github.com/projectdiscovery/tldfinder/pkg/source"
+	"github.com/projectdiscovery/tldfinder/pkg/utils"
 	fileutil "github.com/projectdiscovery/utils/file"
 	folderutil "github.com/projectdiscovery/utils/folder"
 	logutil "github.com/projectdiscovery/utils/log"
 	updateutils "github.com/projectdiscovery/utils/update"
 	"github.com/weppos/publicsuffix-go/publicsuffix"
+	"golang.org/x/exp/slices"
 )
 
 var (
@@ -180,8 +184,6 @@ func ParseOptions() *Options {
 		os.Exit(0)
 	}
 
-	options.preProcessOptions()
-
 	if !options.Silent {
 		showBanner()
 	}
@@ -201,6 +203,8 @@ func ParseOptions() *Options {
 		listSources(options)
 		os.Exit(0)
 	}
+
+	options.preProcessOptions()
 
 	// Validate the options passed by the user and if any
 	// invalid options have been used, exit.
@@ -256,19 +260,26 @@ func listSources(options *Options) {
 
 func (options *Options) preProcessOptions() {
 	for i, query := range options.Domain {
-		query, _ = sanitize(query)
+		query, _ = utils.Sanitize(query)
 		options.Domain[i] = options.parseQuery(query)
-
 	}
 }
 
 func (options *Options) parseQuery(query string) string {
 	if options.DiscoveryMode == source.DNSMode {
+		var tld string
 		if parsed, err := publicsuffix.Parse(query); err == nil {
-			query = parsed.TLD
+			tld = parsed.TLD
 		} else {
-			query = strings.Trim(query, ".")
+			tld = strings.Trim(query, ".")
 		}
+		if slices.Contains(registry.PrivateTLDs, tld) {
+			query = tld
+		} else {
+			gologger.Print().Msgf("[%v] Skipping \"%s\": only private TLDs are allowed (e.g., .google)\n", aurora.NewAurora(!options.NoColor).BrightYellow("WRN"), query)
+			query = ""
+		}
+
 	} else if options.DiscoveryMode == source.TLDMode {
 		if parsed, err := publicsuffix.Parse(query); err == nil {
 			query = parsed.SLD

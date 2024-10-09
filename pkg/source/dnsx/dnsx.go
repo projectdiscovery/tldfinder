@@ -2,21 +2,17 @@ package dnsrepo
 
 import (
 	"context"
-	_ "embed"
 	"math"
-	"strings"
 	"time"
 
 	"github.com/miekg/dns"
 	"github.com/projectdiscovery/dnsx/libs/dnsx"
+	"github.com/projectdiscovery/tldfinder/pkg/registry"
 	"github.com/projectdiscovery/tldfinder/pkg/session"
 	"github.com/projectdiscovery/tldfinder/pkg/source"
 )
 
 // Using data from data.iana.org/TLD/tlds-alpha-by-domain.txt as the source for TLDs
-
-//go:embed tlds.txt
-var tldData string
 
 type Source struct {
 	apiKeys   []string
@@ -48,9 +44,8 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 			return
 		}
 
-		tlds := strings.Split(tldData, "\n")
 		var domains []string
-		for _, tld := range tlds {
+		for _, tld := range registry.TLDs {
 			domains = append(domains, query+"."+tld)
 		}
 		for _, domain := range domains {
