@@ -22,6 +22,7 @@ import (
 
 	"github.com/projectdiscovery/tldfinder/pkg/agent"
 	"github.com/projectdiscovery/tldfinder/pkg/resolve"
+	"github.com/projectdiscovery/tldfinder/pkg/utils"
 )
 
 // Runner is an instance of the domain enumeration
@@ -147,9 +148,9 @@ func (r *Runner) EnumerateMultipleQueriesWithCtx(ctx context.Context, reader io.
 	scanner := bufio.NewScanner(reader)
 	ip, _ := regexp.Compile(`^([0-9\.]+$)`)
 	for scanner.Scan() {
-		domain, err := normalizeLowercase(scanner.Text())
+		domain, err := utils.Sanitize(scanner.Text())
 		isIp := ip.MatchString(domain)
-		if errors.Is(err, ErrEmptyInput) || (r.options.ExcludeIps && isIp) {
+		if errors.Is(err, utils.ErrEmptyInput) || (r.options.ExcludeIps && isIp) {
 			continue
 		}
 
