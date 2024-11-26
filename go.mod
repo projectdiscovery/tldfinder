@@ -18,6 +18,7 @@ require (
 	github.com/rs/xid v1.5.0
 	github.com/weppos/publicsuffix-go v0.30.1
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a
+	golang.org/x/net v0.29.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
@@ -89,7 +90,6 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/crypto v0.27.0 // indirect
 	golang.org/x/mod v0.17.0 // indirect
-	golang.org/x/net v0.29.0 // indirect
 	golang.org/x/oauth2 v0.11.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.25.0 // indirect
