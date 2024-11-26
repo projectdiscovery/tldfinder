@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/hako/durafmt"
+	"golang.org/x/net/publicsuffix"
 
 	"github.com/projectdiscovery/gologger"
 
@@ -69,6 +70,10 @@ func (r *Runner) EnumerateSingleQueryWithCtx(ctx context.Context, query string, 
 				}
 
 				domain := strings.ReplaceAll(strings.ToLower(result.Value), "*.", "")
+				publicSuffix, icann := publicsuffix.PublicSuffix(domain)
+				if !icann {
+					domain = publicSuffix
+				}
 
 				if matchDomain := r.filterAndMatchDomain(domain); matchDomain {
 					if _, ok := uniqueMap[domain]; !ok {
