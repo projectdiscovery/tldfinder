@@ -7,6 +7,7 @@ require (
 	github.com/hako/durafmt v0.0.0-20210608085754-5c1018a4e16b
 	github.com/json-iterator/go v1.1.12
 	github.com/lib/pq v1.10.9
+	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/miekg/dns v1.1.56
 	github.com/pkg/errors v0.9.1
 	github.com/projectdiscovery/dnsx v1.2.1
@@ -14,7 +15,7 @@ require (
 	github.com/projectdiscovery/goflags v0.1.65
 	github.com/projectdiscovery/gologger v1.1.33
 	github.com/projectdiscovery/ratelimit v0.0.63
-	github.com/projectdiscovery/utils v0.2.20
+	github.com/projectdiscovery/utils v0.2.21
 	github.com/rs/xid v1.5.0
 	github.com/weppos/publicsuffix-go v0.30.1
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a
@@ -52,7 +53,6 @@ require (
 	github.com/klauspost/compress v1.17.4 // indirect
 	github.com/klauspost/pgzip v1.2.5 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
-	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
