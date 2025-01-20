@@ -12,14 +12,14 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/projectdiscovery/dnsx v1.2.1
 	github.com/projectdiscovery/fdmax v0.0.4
-	github.com/projectdiscovery/goflags v0.1.67
+	github.com/projectdiscovery/goflags v0.1.68
 	github.com/projectdiscovery/gologger v1.1.40
 	github.com/projectdiscovery/ratelimit v0.0.68
 	github.com/projectdiscovery/utils v0.4.7
 	github.com/rs/xid v1.5.0
 	github.com/weppos/publicsuffix-go v0.30.1
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a
-	golang.org/x/net v0.29.0
+	golang.org/x/net v0.33.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
