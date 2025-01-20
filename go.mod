@@ -13,7 +13,7 @@ require (
 	github.com/projectdiscovery/dnsx v1.2.1
 	github.com/projectdiscovery/fdmax v0.0.4
 	github.com/projectdiscovery/goflags v0.1.68
-	github.com/projectdiscovery/gologger v1.1.40
+	github.com/projectdiscovery/gologger v1.1.41
 	github.com/projectdiscovery/ratelimit v0.0.69
 	github.com/projectdiscovery/utils v0.4.7
 	github.com/rs/xid v1.5.0
