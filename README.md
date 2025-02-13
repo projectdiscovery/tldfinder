@@ -56,7 +56,9 @@ Usage:
 
 Flags:
 INPUT:
-   -d, -domain string[]  domain or list of domains for discovery (file or comma separated)
+   -d, -domain string[]              domain or list of domains for discovery (file or comma separated)
+   -tl, -tld-list string[]           list of TLDs for discovery (file or comma separated)
+   -ptl, -private-tld-list string[]  list of private TLDs for discovery (file or comma separated)
 
 SOURCE:
    -s, -sources string[]           specific sources to use for discovery (-s censys,dnsrepo). Use -ls to display all available sources.

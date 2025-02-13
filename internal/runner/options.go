@@ -51,6 +51,8 @@ type Options struct {
 	Timeout            int                  // Timeout is the seconds to wait for sources to respond
 	MaxEnumerationTime int                  // MaxEnumerationTime is the maximum amount of time in minutes to wait for enumeration
 	Domain             goflags.StringSlice  // Domain is the domain to find domains for
+	TLDList            goflags.StringSlice  // TLDList is the list of TLDs to find domains for
+	PrivateTLDList     goflags.StringSlice  // PrivateTLDList is the list of private TLDs to find domains for
 	Output             io.Writer
 	OutputFile         string               // Output is the file to write found domains to.
 	OutputDirectory    string               // OutputDirectory is the directory to write results to in case list of domains is given
@@ -87,6 +89,8 @@ func ParseOptions() *Options {
 
 	flagSet.CreateGroup("input", "Input",
 		flagSet.StringSliceVarP(&options.Domain, "domain", "d", nil, "domain or list of domains for discovery (file or comma separated)", goflags.FileNormalizedStringSliceOptions),
+		flagSet.StringSliceVarP(&options.TLDList, "tld-list", "tl", nil, "list of TLDs for discovery (file or comma separated)", goflags.FileNormalizedStringSliceOptions),
+		flagSet.StringSliceVarP(&options.PrivateTLDList, "private-tld-list", "ptl", nil, "list of private TLDs for discovery (file or comma separated)", goflags.FileNormalizedStringSliceOptions),
 	)
 
 	var discoveryMode string
@@ -202,6 +206,14 @@ func ParseOptions() *Options {
 	if options.ListSources {
 		listSources(options)
 		os.Exit(0)
+	}
+
+	if len(options.TLDList) > 0 {
+		registry.TLDs = options.TLDList
+	}
+
+	if len(options.PrivateTLDList) > 0 {
+		registry.PrivateTLDs = options.PrivateTLDList
 	}
 
 	options.preProcessOptions()
