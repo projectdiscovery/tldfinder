@@ -67,6 +67,11 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 		countUrl := endpoint + "?" + params.Encode()
 
 		randomApiKey := utils.PickRandom(s.apiKeys, s.Name())
+		if randomApiKey == "" {
+			s.skipped = true
+			return
+		}
+
 		resp, err := sess.HTTPRequest(ctx, http.MethodGet, countUrl, "", map[string]string{
 			"accept":    "application/json",
 			"X-API-Key": randomApiKey,
@@ -110,7 +115,10 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 			apiUrl := endpoint + "?" + params.Encode()
 
 			randomApiKey := utils.PickRandom(s.apiKeys, s.Name())
-
+			if randomApiKey == "" {
+				s.skipped = true
+				return
+			}
 			resp, err := sess.HTTPRequest(ctx, http.MethodGet, apiUrl, "", map[string]string{
 				"accept":    "application/json",
 				"X-API-Key": randomApiKey}, nil, session.BasicAuth{})
