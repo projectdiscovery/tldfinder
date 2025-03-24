@@ -168,8 +168,8 @@ github.com/projectdiscovery/gologger v1.1.50 h1:57nfwckyCdWFEc/akmMvQ6pq4do7BS+w
 github.com/projectdiscovery/gologger v1.1.50/go.mod h1:Q+BWtdhzoxPyWCyNODPROm2w+DERxIRQBP1vqFBFYKM=
 github.com/projectdiscovery/machineid v0.0.0-20240226150047-2e2c51e35983 h1:ZScLodGSezQVwsQDtBSMFp72WDq0nNN+KE/5DHKY5QE=
 github.com/projectdiscovery/machineid v0.0.0-20240226150047-2e2c51e35983/go.mod h1:3G3BRKui7nMuDFAZKR/M2hiOLtaOmyukT20g88qRQjI=
-github.com/projectdiscovery/ratelimit v0.0.76 h1:gTyohiGFfJ2I8GmOwoB/ap6AfcmZz+vBdVqkgv1zZdo=
-github.com/projectdiscovery/ratelimit v0.0.76/go.mod h1:xfVZw3JRQ1HdMhqrf5wE0gIvR11el2Lg6WJunTXeYY4=
+github.com/projectdiscovery/ratelimit v0.0.77 h1:hdZuXQRENzN7gsZgHPZdMOSpMXMzH7WYDLgvW/S5Nbk=
+github.com/projectdiscovery/ratelimit v0.0.77/go.mod h1:0JGCJGpwtmrroTurx/4XIpBFKdeIObWc7ZRVwpYeQcI=
 github.com/projectdiscovery/retryabledns v1.0.96 h1:NeXFOIgLZXstl+v3JNEfU0z0WLvQJTvz4YUFupFruDQ=
 github.com/projectdiscovery/retryabledns v1.0.96/go.mod h1:UCM+4AWmncf1xO/Ku8oYntWLiuaQTwD7TFCfaDKp4ig=
 github.com/projectdiscovery/utils v0.4.15 h1:6Bh+Bvqc7352rUzQtRtQqNGaVIXv6ZJ4yvE++Jrk58E=
