@@ -1,7 +1,6 @@
 module github.com/projectdiscovery/tldfinder
 
 go 1.21.3
-
 require (
 	github.com/corpix/uarand v0.2.0
 	github.com/hako/durafmt v0.0.0-20210608085754-5c1018a4e16b
@@ -13,7 +12,7 @@ require (
 	github.com/projectdiscovery/dnsx v1.2.2
 	github.com/projectdiscovery/fdmax v0.0.4
 	github.com/projectdiscovery/goflags v0.1.74
-	github.com/projectdiscovery/gologger v1.1.50
+	github.com/projectdiscovery/gologger v1.1.51
 	github.com/projectdiscovery/ratelimit v0.0.77
 	github.com/projectdiscovery/utils v0.4.15
 	github.com/rs/xid v1.5.0
