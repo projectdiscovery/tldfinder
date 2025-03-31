@@ -1,7 +1,6 @@
 module github.com/projectdiscovery/tldfinder
 
 go 1.21.3
-
 require (
 	github.com/corpix/uarand v0.2.0
 	github.com/hako/durafmt v0.0.0-20210608085754-5c1018a4e16b
@@ -69,7 +68,7 @@ require (
 	github.com/pierrec/lz4/v4 v4.1.2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect
 	github.com/projectdiscovery/blackrock v0.0.1 // indirect
-	github.com/projectdiscovery/cdncheck v1.1.11 // indirect
+	github.com/projectdiscovery/cdncheck v1.1.12 // indirect
 	github.com/projectdiscovery/machineid v0.0.0-20240226150047-2e2c51e35983 // indirect
 	github.com/projectdiscovery/retryabledns v1.0.96 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
