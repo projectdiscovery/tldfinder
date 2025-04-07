@@ -172,8 +172,8 @@ github.com/projectdiscovery/ratelimit v0.0.78 h1:lLxsS6+RT6JWyuKAP+APcRew5XzurI+
 github.com/projectdiscovery/ratelimit v0.0.78/go.mod h1:OmwZ4k6FoZLeTDZpto4FqMX+4DpD8rE2ZZtbRTPcN4Q=
 github.com/projectdiscovery/retryabledns v1.0.97 h1:b5PCeaIlfXElYVmqnQJ1CVlJZvdpbBk0kSPbiKPoRdk=
 github.com/projectdiscovery/retryabledns v1.0.97/go.mod h1:iDsIlvCvAzN6Y/eP251xkyh9I9zLpgJ+DcfapulPYec=
-github.com/projectdiscovery/utils v0.4.16 h1:VMru9Xf+h/vnmq4uS9adID2N2DojRLfLl8Us333XQfU=
-github.com/projectdiscovery/utils v0.4.16/go.mod h1:y5gnpQn802iEWqf0djTRNskJlS62P5eqe1VS1+ah0tk=
+github.com/projectdiscovery/utils v0.4.17 h1:LATr3L0t+xNt+hLReQjEf66RpuALPk2vV9YV341XkNQ=
+github.com/projectdiscovery/utils v0.4.17/go.mod h1:y5gnpQn802iEWqf0djTRNskJlS62P5eqe1VS1+ah0tk=
 github.com/rivo/uniseg v0.1.0/go.mod h1:J6wj4VEh+S6ZtnVlnTBMWIodfgj8LQOQFoIToxlJtxc=
 github.com/rivo/uniseg v0.2.0/go.mod h1:J6wj4VEh+S6ZtnVlnTBMWIodfgj8LQOQFoIToxlJtxc=
 github.com/rivo/uniseg v0.4.7 h1:WUdvkW8uEhrYfLC4ZzdpI2ztxP1I582+49Oc5Mq64VQ=
