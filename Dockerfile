@@ -7,7 +7,7 @@ RUN go mod download
 RUN go build ./cmd/tldfinder
 
 # Release
-FROM alpine:3.21.3
+FROM alpine:3.22.0
 RUN apk -U upgrade --no-cache \
     && apk add --no-cache bind-tools ca-certificates
 COPY --from=builder /app/tldfinder /usr/local/bin/
