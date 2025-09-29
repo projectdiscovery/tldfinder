@@ -15,7 +15,7 @@ require (
 	github.com/projectdiscovery/goflags v0.1.74
 	github.com/projectdiscovery/gologger v1.1.55
 	github.com/projectdiscovery/ratelimit v0.0.82
-	github.com/projectdiscovery/utils v0.5.0
+	github.com/projectdiscovery/utils v0.6.0
 	github.com/rs/xid v1.5.0
 	github.com/weppos/publicsuffix-go v0.40.3-0.20250408071509-6074bbe7fd39
 	golang.org/x/exp v0.0.0-20250106191152-7588d65b2ba8
@@ -44,7 +44,7 @@ require (
 	github.com/dlclark/regexp2 v1.11.5 // indirect
 	github.com/dsnet/compress v0.0.2-0.20230904184137-39efe44ab707 // indirect
 	github.com/fatih/color v1.15.0 // indirect
-	github.com/gaissmai/bart v0.23.1 // indirect
+	github.com/gaissmai/bart v0.25.0 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/google/go-github/v30 v30.1.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
