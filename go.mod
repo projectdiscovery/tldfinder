@@ -13,9 +13,9 @@ require (
 	github.com/projectdiscovery/dnsx v1.2.3
 	github.com/projectdiscovery/fdmax v0.0.4
 	github.com/projectdiscovery/goflags v0.1.74
-	github.com/projectdiscovery/gologger v1.1.67
+	github.com/projectdiscovery/gologger v1.1.68
 	github.com/projectdiscovery/ratelimit v0.0.83
-	github.com/projectdiscovery/utils v0.9.0
+	github.com/projectdiscovery/utils v0.10.0
 	github.com/rs/xid v1.5.0
 	github.com/weppos/publicsuffix-go v0.50.3-0.20260104170930-90713dec78f2
 	golang.org/x/exp v0.0.0-20250106191152-7588d65b2ba8
@@ -75,9 +75,9 @@ require (
 	github.com/pierrec/lz4/v4 v4.1.23 // indirect
 	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect
 	github.com/projectdiscovery/blackrock v0.0.1 // indirect
-	github.com/projectdiscovery/cdncheck v1.2.20 // indirect
+	github.com/projectdiscovery/cdncheck v1.2.29 // indirect
 	github.com/projectdiscovery/machineid v0.0.0-20250715113114-c77eb3567582 // indirect
-	github.com/projectdiscovery/retryabledns v1.0.113 // indirect
+	github.com/projectdiscovery/retryabledns v1.0.114 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/saintfish/chardet v0.0.0-20230101081208-5e3ef4b5456d // indirect
 	github.com/shirou/gopsutil/v3 v3.23.7 // indirect
