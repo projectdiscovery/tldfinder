@@ -230,8 +230,8 @@ github.com/projectdiscovery/machineid v0.0.0-20250715113114-c77eb3567582 h1:eR+0
 github.com/projectdiscovery/machineid v0.0.0-20250715113114-c77eb3567582/go.mod h1:3G3BRKui7nMuDFAZKR/M2hiOLtaOmyukT20g88qRQjI=
 github.com/projectdiscovery/ratelimit v0.0.83 h1:hfb36QvznBrjA4FNfpFE8AYRVBYrfJh8qHVROLQgl54=
 github.com/projectdiscovery/ratelimit v0.0.83/go.mod h1:z076BrLkBb5yS7uhHNoCTf8X/BvFSGRxwQ8EzEL9afM=
-github.com/projectdiscovery/retryabledns v1.0.113 h1:s+DAzdJ8XhLxRgt5636H0HG9OqHsGRjX9wTrLSTMqlQ=
-github.com/projectdiscovery/retryabledns v1.0.113/go.mod h1:+DyanDr8naxQ2dRO9c4Ezo3NHHXhz8L0tTSRYWhiwyA=
+github.com/projectdiscovery/retryabledns v1.0.114 h1:COyNKzhA7oa3C/1639WRXeXsKrUJx06paVbN64IHZ3E=
+github.com/projectdiscovery/retryabledns v1.0.114/go.mod h1:+DyanDr8naxQ2dRO9c4Ezo3NHHXhz8L0tTSRYWhiwyA=
 github.com/projectdiscovery/utils v0.9.0 h1:eu9vdbP0VYXI9nGSLfnOpUqBeW9/B/iSli7U8gPKZw8=
 github.com/projectdiscovery/utils v0.9.0/go.mod h1:zcVu1QTlMi5763qCol/L3ROnbd/UPSBP8fI5PmcnF6s=
 github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4/go.mod h1:xMI15A0UPsDsEKsMN9yxemIoYk6Tm2C1GtYGdfGttqA=
