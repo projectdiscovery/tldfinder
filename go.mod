@@ -15,7 +15,7 @@ require (
 	github.com/projectdiscovery/goflags v0.1.74
 	github.com/projectdiscovery/gologger v1.1.70
 	github.com/projectdiscovery/ratelimit v0.0.87
-	github.com/projectdiscovery/utils v0.11.0
+	github.com/projectdiscovery/utils v0.11.1
 	github.com/rs/xid v1.5.0
 	github.com/weppos/publicsuffix-go v0.50.3-0.20260104170930-90713dec78f2
 	golang.org/x/exp v0.0.0-20250106191152-7588d65b2ba8
