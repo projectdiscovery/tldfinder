@@ -1,6 +1,6 @@
 module github.com/projectdiscovery/tldfinder
 
-go 1.24.0
+go 1.26.10
 
 require (
 	github.com/corpix/uarand v0.2.0
