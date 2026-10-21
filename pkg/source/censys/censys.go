@@ -123,11 +123,11 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 			if err != nil {
 				results <- source.Result{Source: s.Name(), Type: source.Error, Error: err}
 				s.errors++
-				resp.Body.Close()
+				_ = resp.Body.Close()
 				return
 			}
 
-			resp.Body.Close()
+			_ = resp.Body.Close()
 
 			for _, hit := range censysResponse.Result.Hits {
 				for _, name := range hit.Names {

@@ -37,7 +37,7 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 			return
 		}
 
-		defer resp.Body.Close()
+		defer func() { _ = resp.Body.Close() }()
 
 		scanner := bufio.NewScanner(resp.Body)
 		for scanner.Scan() {

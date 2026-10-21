@@ -48,9 +48,9 @@ func NewSession(query string, proxy string, multiRateLimiter *ratelimit.MultiLim
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true,
 		},
-		Dial: (&net.Dialer{
+		DialContext: (&net.Dialer{
 			Timeout: time.Duration(timeout) * time.Second,
-		}).Dial,
+		}).DialContext,
 	}
 
 	// Add proxy
@@ -142,7 +142,7 @@ func (s *Session) DiscardHTTPResponse(response *http.Response) {
 			gologger.Warning().Msgf("Could not discard response body: %s\n", err)
 			return
 		}
-		response.Body.Close()
+		_ = response.Body.Close()
 	}
 }
 

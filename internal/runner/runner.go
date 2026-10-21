@@ -168,7 +168,7 @@ func (r *Runner) EnumerateMultipleQueriesWithCtx(ctx context.Context, reader io.
 
 			err = r.EnumerateSingleQueryWithCtx(ctx, domain, append(writers, file))
 
-			file.Close()
+			_ = file.Close()
 		} else if r.options.OutputDirectory != "" {
 			outputFile := path.Join(r.options.OutputDirectory, domain)
 			if r.options.JSON {
@@ -186,7 +186,7 @@ func (r *Runner) EnumerateMultipleQueriesWithCtx(ctx context.Context, reader io.
 
 			err = r.EnumerateSingleQueryWithCtx(ctx, domain, append(writers, file))
 
-			file.Close()
+			_ = file.Close()
 		} else {
 			err = r.EnumerateSingleQueryWithCtx(ctx, domain, writers)
 		}

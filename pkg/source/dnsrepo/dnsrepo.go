@@ -56,7 +56,7 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 			sess.DiscardHTTPResponse(resp)
 			return
 		}
-		resp.Body.Close()
+		_ = resp.Body.Close()
 		var responses DnsRepoResponse
 		err = json.Unmarshal(responseData, &responses)
 		if err != nil {
