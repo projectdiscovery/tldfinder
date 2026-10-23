@@ -278,7 +278,8 @@ func (options *Options) preProcessOptions() {
 }
 
 func (options *Options) parseQuery(query string) string {
-	if options.DiscoveryMode == source.DNSMode {
+	switch options.DiscoveryMode {
+	case source.DNSMode:
 		var tld string
 		if parsed, err := publicsuffix.Parse(query); err == nil {
 			tld = parsed.TLD
@@ -291,8 +292,7 @@ func (options *Options) parseQuery(query string) string {
 			gologger.Print().Msgf("[%v] Skipping \"%s\": only private TLDs are allowed (e.g., .google)\n", aurora.NewAurora(!options.NoColor).BrightYellow("WRN"), query)
 			query = ""
 		}
-
-	} else if options.DiscoveryMode == source.TLDMode {
+	case source.TLDMode:
 		if parsed, err := publicsuffix.Parse(query); err == nil {
 			query = parsed.SLD
 		}

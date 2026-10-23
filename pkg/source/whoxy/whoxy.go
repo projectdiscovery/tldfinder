@@ -57,7 +57,7 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 
 			var whoxyResponse response
 			err = jsoniter.NewDecoder(resp.Body).Decode(&whoxyResponse)
-			resp.Body.Close()
+			_ = resp.Body.Close()
 			if err != nil {
 				results <- source.Result{Source: s.Name(), Type: source.Error, Error: err}
 				s.errors++

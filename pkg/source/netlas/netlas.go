@@ -86,7 +86,7 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 			s.errors++
 			return
 		}
-		defer resp.Body.Close()
+		defer func() { _ = resp.Body.Close() }()
 
 		body, err := io.ReadAll(resp.Body)
 		if err != nil {
@@ -127,7 +127,7 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 				s.errors++
 				return
 			}
-			defer resp.Body.Close()
+			defer func() { _ = resp.Body.Close() }()
 			body, err := io.ReadAll(resp.Body)
 			if err != nil {
 				results <- source.Result{Source: s.Name(), Type: source.Error, Error: fmt.Errorf("error reading ressponse body")}

@@ -34,7 +34,7 @@ A streamlined tool for discovering private TLDs for security research.
 
 ## Installation
 
-tldfinder requires **Go 1.21** to install successfully. To install, just run the below command or download pre-compiled binary from [release page](https://github.com/projectdiscovery/tldfinder/releases).
+tldfinder requires **Go 1.26.10** to install successfully. To install, just run the below command or download pre-compiled binary from [release page](https://github.com/projectdiscovery/tldfinder/releases).
 
 ```console
 go install github.com/projectdiscovery/tldfinder/cmd/tldfinder@latest

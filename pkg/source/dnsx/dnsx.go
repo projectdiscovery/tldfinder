@@ -72,7 +72,7 @@ func (s *Source) Run(ctx context.Context, query string, sess *session.Session) <
 				}
 				dnsData := dnsx.ResponseData{}
 				dnsData.DNSData, _ = dnsX.QueryMultiple(domain)
-				if dnsData.DNSData == nil || dnsData.DNSData.StatusCode == "NXDOMAIN" || dnsData.Host == "" || dnsData.Timestamp.IsZero() {
+				if dnsData.DNSData == nil || dnsData.StatusCode == "NXDOMAIN" || dnsData.Host == "" || dnsData.Timestamp.IsZero() {
 					return
 				}
 

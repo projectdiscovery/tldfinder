@@ -57,7 +57,7 @@ func (s *Source) getSubdomainsFromSQL(ctx context.Context, query string, results
 		return 0
 	}
 
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 
 	limitClause := ""
 	if all, ok := ctx.Value(contextutil.ContextArg("All")).(contextutil.ContextArg); ok {
@@ -148,11 +148,11 @@ func (s *Source) getSubdomainsFromHTTP(ctx context.Context, query string, sess *
 	if err != nil {
 		results <- source.Result{Source: s.Name(), Type: source.Error, Error: err}
 		s.errors++
-		resp.Body.Close()
+		_ = resp.Body.Close()
 		return false
 	}
 
-	resp.Body.Close()
+	_ = resp.Body.Close()
 
 	for _, domain := range domains {
 		for _, value := range strings.Split(domain.NameValue, "\n") {
