@@ -11,7 +11,7 @@ require (
 	github.com/miekg/dns v1.1.73
 	github.com/pkg/errors v0.9.1
 	github.com/projectdiscovery/dnsx v1.3.1
-	github.com/projectdiscovery/fdmax v0.0.4
+	github.com/projectdiscovery/fdmax v0.0.6
 	github.com/projectdiscovery/goflags v0.2.1
 	github.com/projectdiscovery/gologger v1.1.73
 	github.com/projectdiscovery/ratelimit v0.0.94
@@ -81,7 +81,7 @@ require (
 	golang.org/x/crypto v0.55.0 // indirect
 	golang.org/x/oauth2 v0.27.0 // indirect
 	golang.org/x/sync v0.22.0 // indirect
-	golang.org/x/sys v0.47.0 // indirect
+	golang.org/x/sys v0.49.0 // indirect
 	golang.org/x/term v0.45.0 // indirect
 	golang.org/x/text v0.41.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
