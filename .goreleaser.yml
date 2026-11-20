@@ -1,3 +1,5 @@
+version: 2
+
 before:
   hooks:
     - go mod tidy
@@ -25,11 +27,26 @@ builds:
   main: cmd/tldfinder/main.go
 
 archives:
-- format: zip
+- formats: [zip]
   name_template: '{{ .ProjectName }}_{{ .Version }}_{{ if eq .Os "darwin" }}macOS{{ else }}{{ .Os }}{{ end }}_{{ .Arch }}'
 
 checksum:
   algorithm: sha256
+
+dockers_v2:
+- images:
+    - projectdiscovery/tldfinder
+  tags:
+    - '{{ .Tag }}'
+    - latest
+  labels:
+    org.opencontainers.image.created: '{{ .Date }}'
+    org.opencontainers.image.ref.name: '{{ .Tag }}'
+    org.opencontainers.image.revision: '{{ .FullCommit }}'
+    org.opencontainers.image.version: '{{ .Version }}'
+  platforms:
+    - linux/amd64
+    - linux/arm64
 
 announce:
   slack:

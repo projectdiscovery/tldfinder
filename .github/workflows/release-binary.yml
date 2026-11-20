@@ -6,22 +6,31 @@ on:
       - '*'
   workflow_dispatch:
 
-jobs: 
-  release: 
+jobs:
+  release:
+    uses: projectdiscovery/workflows/.github/workflows/goreleaser-publish.yaml@v1
+    permissions:
+      contents: write
+    secrets:
+      docker-username: ${{ secrets.DOCKER_USERNAME }}
+      docker-token: ${{ secrets.DOCKER_TOKEN }}
+      slack-webhook: ${{ secrets.RELEASE_SLACK_WEBHOOK }}
+      discord-webhook-id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+      discord-webhook-token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+
+  dockerhub-description:
+    name: Update Docker Hub description
+    needs: release
     runs-on: ubuntu-latest
-    steps: 
+    permissions:
+      contents: read
+    steps:
       - uses: actions/checkout@v7
-        with: 
-          fetch-depth: 0
+        with:
+          persist-credentials: false
 
-      - name: Set up Go
-        uses: projectdiscovery/actions/setup/go@v1
-
-      - uses: projectdiscovery/actions/goreleaser@v1
-        with: 
-          release: true
-        env: 
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          SLACK_WEBHOOK: "${{ secrets.RELEASE_SLACK_WEBHOOK }}"
-          DISCORD_WEBHOOK_ID: "${{ secrets.DISCORD_WEBHOOK_ID }}"
-          DISCORD_WEBHOOK_TOKEN: "${{ secrets.DISCORD_WEBHOOK_TOKEN }}"
+      - uses: peter-evans/dockerhub-description@v5
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+          repository: projectdiscovery/tldfinder
